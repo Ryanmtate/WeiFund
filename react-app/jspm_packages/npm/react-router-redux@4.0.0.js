@@ -1,1 +1,0 @@
-module.exports = require("npm:react-router-redux@4.0.0/lib/index");
