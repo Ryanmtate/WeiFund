@@ -1,4 +1,6 @@
 app/.meteor/local
 app/standalone
+react-app/node_modules
+react-app/jspm_packages
 standalone
 settings.md
