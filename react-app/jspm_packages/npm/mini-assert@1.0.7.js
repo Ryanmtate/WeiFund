@@ -1,0 +1,1 @@
+module.exports = require("npm:mini-assert@1.0.7/assert.js");
