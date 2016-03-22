@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import ipfs from 'ipfs-js';
 import Web3 from 'web3';
 let web3;
 
@@ -16,6 +17,20 @@ function SetupEthereumProvider(ethereumProvider){
       resolve(web3.currentProvider.host);
     });
 
+  });
+}
+
+function SetupIPFSProvider(ipfsProvider){
+  return new Promise((resolve, reject) => {
+    let p = ipfsProvider.split(":");
+    ipfs.setProvider({host: p[0], port: p[1]});
+    ipfs.add('Test', (error, hash) => {
+      if(error){reject(error)}
+      ipfs.cat(hash, (error, buffer) => {
+        if(error){reject(error)}
+          resolve(ipfsProvider);
+      });
+    });
   });
 }
 
@@ -38,8 +53,12 @@ export default function PROVIDERS(ethereumProvider, ipfsProvider){
           ipfsProvider : ""
         };
 
-        SetupEthereumProvider(ethereumProvider).then((currentProvider) => {
-          Providers.ethereumProvider = currentProvider;
+        SetupEthereumProvider(ethereumProvider).then((ethereumProviderSet) => {
+          Providers.ethereumProvider = ethereumProviderSet;
+          console.log(ipfsProvider);
+          return SetupIPFSProvider(ipfsProvider);
+        }).then((ipfsProviderSet) => {
+          Providers.ipfsProvider = ipfsProviderSet;
           Providers.pending = false;
           resolve(Providers);
         }).catch((error) => {

@@ -7,8 +7,8 @@ class SetupComponent extends Component {
   constructor(props){
     super(props);
     this.state = {
-      ethProvider : this.props.Providers.ethereumProvider,
-      ipfsProvider : this.props.Providers.ipfsProvider
+      ethProvider : undefined,
+      ipfsProvider : undefined
     }
   }
 
@@ -27,15 +27,19 @@ class SetupComponent extends Component {
   }
 
   validateEthProvider(ethereumProvider){
-    switch(ethereumProvider){
-      case 'metamask':
-        return 'success';
-        break;
-      case 'http://localhost:8545':
-        return 'success';
-      default:
-        return 'warning';
-    }
+    let len = String('http://localhost:8545').length; // 21
+    let len2 = String('http://104.236.65.136:8545').length // 26
+
+    if(ethereumProvider == undefined){
+      return 'warning';
+    } else if(ethereumProvider == 'metamask' || ethereumProvider == 'http://localhost:8545'){
+      return 'success';
+    } else if(String(ethereumProvider).length == len || String(ethereumProvider).length - 1 == len ||
+      String(ethereumProvider).length == len2 || String(ethereumProvider).length - 1 == len2){
+      return 'success'
+    } else {
+      return 'warning';
+    };
   }
 
   // Setting Ethereum Provider Manually
@@ -44,81 +48,90 @@ class SetupComponent extends Component {
   }
 
   validateIPFSProvider(ipfs){
-    switch(ipfs){
-      case 'localhost:5001':
-        return 'success';
-      default:
-        return 'warning';
-    }
+    let len = String('localhost:5001').length; // 14
+    let len2 = String('104.131.53.68:5001').length // 18
+
+    console.log(len, len2);
+
+    if(ipfs == undefined){
+      return 'warning';
+    } else if(ipfs == 'metamask' || ipfs == 'http://localhost:8545'){
+      return 'success';
+    } else if(String(ipfs).length == len || String(ipfs).length - 1 == len ||
+      String(ipfs).length == len2 || String(ipfs).length - 1 == len2){
+      return 'success'
+    } else {
+      return 'warning';
+    };
   }
 
   render(){
     let { Providers } = this.props;
-    let { ethereumProvider, ipfsProvider, pending } = Providers;
-
-    console.log(Providers);
+    let { ethereumProvider, ipfsProvider, pending, error } = Providers;
 
     return (
       <Modal show={true}>
         <Modal.Header closeButton>
-          { pending ? <div>
-            <Modal.Title>Fetching Providers</Modal.Title>
-            <h6>Establishing Ethereum and IPFS providers.</h6>
-          </div> :
-          <div>
-            <Modal.Title>Setup Providers</Modal.Title>
-            <h6>Please setup your Ethereum and IPFS backend
-            here before you begin using this application.
-            </h6>
-          </div>
-        }
-
-
+          <Modal.Title>Setup Providers</Modal.Title>
+          <h6>Please setup your Ethereum and IPFS backend
+          here before you begin using this application.
+          </h6>
         </Modal.Header>
         <Modal.Body>
-        {pending ? <p>Fetching Providers... one moment.</p> :
+        {pending ?
           <div>
-            <Input
-              type="text"
-              value={this.state.ethProvider}
-              placeholder={""}
-              label={
-                <div>
-                <h3>Ethereum RPC Provider</h3>
-                <p>Please set your Ethereum RPC provider URL below.
-                The provider enables WeiFund to interact with your Ethereum node.
-                If you do not have a node to run as a provider,
-                run one by following these instructions:
-                <a href="https://ethereum.gitbooks.io/frontier-guide/content/getting_a_client.html"
-                target="_blank"> Ethereum Frontier Guide</a></p></div>}
-              help={`Example: http://localhost:8545 | For MetaMask support, type "metamask".`}
-              bsStyle={this.validateEthProvider(this.state.ethProvider)}
-              hasFeedback
-              ref="ethProvider"
-              groupClassName="group-class"
-              labelClassName="label-class"
-              onChange={this.updateEthProvider} />
-
+            { error == undefined ? <p>Fetching Providers... one moment.</p> :
+              <div>
+              <p>
+                Could not connect to local providers. Please set the following provider
+                information:
+              </p>
               <Input
                 type="text"
-                value={this.state.ipfsProvider}
+                value={this.state.ethProvider}
                 placeholder={""}
                 label={
                   <div>
-                  <h3>IPFS Provider</h3>
-                  <p>Please set your Inter Planatary File System (IPFS) provider URL below.
-                  The provider enables WeiFund to interact with your IPFS backend,
-                  for things like file and data storage. If you do not have an IPFS node as a provider,
+                  <h3>Ethereum RPC Provider</h3>
+                  <p>Please set your Ethereum RPC provider URL below.
+                  The provider enables WeiFund to interact with your Ethereum node.
+                  If you do not have a node to run as a provider,
                   run one by following these instructions:
-                  <a href="https://ipfs.io/docs/install/"
-                  target="_blank"> IPFS Installation Guide</a></p></div>}
-                help={`Example: localhost:5001`}
-                bsStyle={this.validateIPFSProvider(this.state.ipfsProvider)}
+                  <a href="https://ethereum.gitbooks.io/frontier-guide/content/getting_a_client.html"
+                  target="_blank"> Ethereum Frontier Guide</a></p></div>}
+                help={`Example: http://localhost:8545 | For MetaMask support, type "metamask".`}
+                bsStyle={this.validateEthProvider(this.state.ethProvider)}
                 hasFeedback
-                ref="ipfsProvider"
+                ref="ethProvider"
                 groupClassName="group-class"
                 labelClassName="label-class"
-                onChange={this.updateIPFSProvider} />
+                onChange={this.updateEthProvider} />
+
+                <Input
+                  type="text"
+                  value={this.state.ipfsProvider}
+                  placeholder={""}
+                  label={
+                    <div>
+                    <h3>IPFS Provider</h3>
+                    <p>Please set your Inter Planatary File System (IPFS) provider URL below.
+                    The provider enables WeiFund to interact with your IPFS backend,
+                    for things like file and data storage. If you do not have an IPFS node as a provider,
+                    run one by following these instructions:
+                    <a href="https://ipfs.io/docs/install/"
+                    target="_blank"> IPFS Installation Guide</a></p></div>}
+                  help={`Example: localhost:5001`}
+                  bsStyle={this.validateIPFSProvider(this.state.ipfsProvider)}
+                  hasFeedback
+                  ref="ipfsProvider"
+                  groupClassName="group-class"
+                  labelClassName="label-class"
+                  onChange={this.updateIPFSProvider} />
+                  </div>
+            }
+          </div> :
+          <div>
+            <p>All Set</p>
           </div>
         }
 
