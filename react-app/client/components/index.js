@@ -1,20 +1,20 @@
 import WeiFundApp from './WeiFundApp';
-// import Setup from './providers/Setup';
-import NoMatch from './NoMatch';
+
 import Header from './layout/Header';
 import Body from './layout/Body';
 import Footer from './layout/Footer';
-import EthereumSettings from './providers/EthereumSettings';
-import IPFSSettings from './providers/IPFSSettings';
+
+import EthereumSettings from './views/providerSettings/EthereumSettings';
+import IPFSSettings from './views/providerSettings/IPFSSettings';
 import Discover from './views/Discover';
 import * as Campaign from './views/campaign/index';
+import NoMatch from './views/NoMatch';
 
 export {
   Header,
   Body,
   Footer,
   WeiFundApp,
-  // Setup,
   NoMatch,
   EthereumSettings,
   IPFSSettings,

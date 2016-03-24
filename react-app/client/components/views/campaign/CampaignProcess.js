@@ -20,7 +20,6 @@ class CampaignProcessComponent extends Component {
   render(){
     let { Views, Campaign } = this.props;
     let { steps } = Campaign.campaignProcess;
-    console.log(steps);
 
     let S = steps.map((s, i) => {
       return (
@@ -29,7 +28,7 @@ class CampaignProcessComponent extends Component {
     });
 
     return (
-      <Steps current={0}>{S}</Steps>
+      <Steps current={Campaign.currentStep}>{S}</Steps>
     );
   }
 }

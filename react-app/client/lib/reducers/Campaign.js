@@ -22,6 +22,19 @@ const DEFAULT_CAMPAIGN_STATE = {
       description : '',
       stepId : 'campaign-step-5'
     }]
+  },
+  newCampaign : {
+    name: undefined,
+    expiry: {
+      unix : undefined,
+      local : undefined
+    },
+    beneficiary: undefined,
+    fundingGoal: undefined,
+    contributionEndpoint: {
+      active : true,
+      address : undefined
+    }
   }
 }
 

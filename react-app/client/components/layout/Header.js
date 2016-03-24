@@ -8,8 +8,11 @@ import * as Actions from '../../lib/actions/index';
 class HeaderComponent extends Component {
 
   startCampaign = () => {
-    let { dispatch } = this.props;
-    dispatch(Actions.Views.Body('campaign-step-1'));
+    let { dispatch, Campaign } = this.props;
+
+    let step = Campaign.currentStep;
+    let view = Campaign.campaignProcess.steps[step].stepId;
+    dispatch(Actions.Views.Body(view));
   }
 
   discoverCampaigns = () => {
@@ -38,7 +41,8 @@ class HeaderComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    Views : state.Views
+    Views : state.Views,
+    Campaign : state.Campaign
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import * as Actions from '../../lib/actions/index';
-import {Header, Footer, Setup} from '../index';
+import * as Actions from '../../../lib/actions/index';
+import {Header, Footer, Setup} from '../../index';
 import { Modal, Alert, Button, ButtonToolbar, Input } from 'react-bootstrap';
 
 class EthereumSettingsComponent extends Component {

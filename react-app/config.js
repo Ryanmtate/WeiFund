@@ -25,6 +25,7 @@ System.config({
     "gulp": "npm:gulp@3.9.1",
     "gulp-jspm": "npm:gulp-jspm@0.5.8",
     "ipfs-js": "npm:ipfs-js@0.0.8",
+    "moment": "npm:moment@2.12.0",
     "rc-steps": "npm:rc-steps@1.4.4",
     "react": "npm:react@0.14.7",
     "react-bootstrap": "npm:react-bootstrap@0.28.3",
@@ -1516,6 +1517,9 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "minimist": "npm:minimist@0.0.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:moment@2.12.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:multiaddr@1.3.0": {

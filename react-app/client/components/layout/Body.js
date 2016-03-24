@@ -21,6 +21,12 @@ class BodyComponent extends Component {
         return <Campaign.CampaignStepOne />
       case 'campaign-step-2':
         return <Campaign.CampaignStepTwo />
+      case 'campaign-step-3':
+        return <Campaign.CampaignStepThree />
+      case 'campaign-step-4':
+        return <Campaign.CampaignStepFour />
+      case 'campaign-step-5':
+        return <Campaign.CampaignStepFive />
       case 'discover':
         return <Discover />
     }
