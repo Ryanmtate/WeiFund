@@ -1,12 +1,20 @@
 import Promise from 'bluebird';
 import ipfs from 'ipfs-js';
 import Web3 from 'web3';
-let web3;
+var web3 = null;
+
+let PROVIDER_OBJECT = {
+  pending : true,
+  ethereumProvider : "",
+  ipfsProvider : ""
+};
 
 function SetupEthereumProvider(ethereumProvider){
   return new Promise((resolve, reject) => {
-    if(typeof web3 !== 'undefined'){
-      web3 = new Web3(web3.currentProvider);
+
+
+    if(window.web3){
+      web3 = new Web3(window.web3.currentProvider);
     } else {
       // set the provider you want from Web3.providers
       web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
@@ -14,7 +22,13 @@ function SetupEthereumProvider(ethereumProvider){
 
     web3.eth.getAccounts((error, result) => {
       if(error){reject(error)}
-      resolve(web3.currentProvider.host);
+      console.log(result);
+      if(web3.currentProvider.readable){
+        resolve('MetaMask');
+      } else {
+        resolve(web3.currentProvider.host);
+      };
+
     });
 
   });
@@ -24,47 +38,56 @@ function SetupIPFSProvider(ipfsProvider){
   return new Promise((resolve, reject) => {
     let p = ipfsProvider.split(":");
     ipfs.setProvider({host: p[0], port: p[1]});
-    ipfs.add('Test', (error, hash) => {
+    let t = 'Test';
+    ipfs.add(t, (error, hash) => {
       if(error){reject(error)}
       ipfs.cat(hash, (error, buffer) => {
         if(error){reject(error)}
-          resolve(ipfsProvider);
+        if(buffer.toString() != t){
+          reject("error with ipfs");
+        }
+
+        resolve(ipfsProvider);
       });
     });
   });
 }
 
-export default function PROVIDERS(ethereumProvider, ipfsProvider){
-  // Testing PROVIDERS REQUEST CALL
-  /*
-  This action will fetch the local providers upon call (metamask, then localhost);
-  return if the connection is open/available. If not, will throw and error, and ask to
-  connect to third party host.
-
-  result will update our state, and consequently our UI.
-  */
+export function Ethereum(ethereumProvider){
   return {
-    types : ['PROVIDERS_REQUEST', 'PROVIDERS_SUCCESS', 'PROVIDERS_FAILURE'],
+    types : ['ETHEREUM_PROVIDER_REQUEST', 'ETHEREUM_PROVIDER_SUCCESS', 'ETHEREUM_PROVIDER_FAILURE'],
     promise : () => {
       return new Promise((resolve, reject) => {
-        let Providers = {
-          pending : true,
-          ethereumProvider : "",
-          ipfsProvider : ""
-        };
-
         SetupEthereumProvider(ethereumProvider).then((ethereumProviderSet) => {
-          Providers.ethereumProvider = ethereumProviderSet;
-          console.log(ipfsProvider);
-          return SetupIPFSProvider(ipfsProvider);
-        }).then((ipfsProviderSet) => {
-          Providers.ipfsProvider = ipfsProviderSet;
-          Providers.pending = false;
-          resolve(Providers);
+          PROVIDER_OBJECT.ethereumProvider = ethereumProviderSet;
+          resolve(PROVIDER_OBJECT);
         }).catch((error) => {
           reject(error);
         });
       });
     }
+  }
+}
+
+export function IPFS(ipfsProvider){
+  return {
+    types : ['IPFS_PROVIDER_REQUEST', 'IPFS_PROVIDER_SUCCESS', 'IPFS_PROVIDER_FAILURE'],
+    promise : () => {
+      return new Promise((resolve, reject) => {
+        SetupIPFSProvider(ipfsProvider).then((ipfsProviderSet) => {
+          PROVIDER_OBJECT.ipfsProvider = ipfsProviderSet;
+          resolve(PROVIDER_OBJECT);
+        }).catch((error) => {
+          reject(error);
+        });
+      });
+    }
+  }
+}
+
+export function Setup(){
+  return {
+    type : 'SETUP_SUCCESS',
+    pending : false
   }
 }

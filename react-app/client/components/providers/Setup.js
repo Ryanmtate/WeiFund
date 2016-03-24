@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Modal, Input } from 'react-bootstrap';
-import * as Actions from '../lib/actions/index';
+import { Modal, Input, ButtonToolbar, Button, Grid, Row, Col, Image } from 'react-bootstrap';
+import * as Actions from '../../lib/actions/index';
 
 class SetupComponent extends Component {
   constructor(props){
@@ -17,8 +17,10 @@ class SetupComponent extends Component {
     let { Providers, dispatch } = this.props;
     let { ethereumProvider, ipfsProvider, pending } = Providers;
 
-    { pending ? dispatch(Actions.Providers(ethereumProvider, ipfsProvider)) : null }
-
+    if(pending){
+      dispatch(Actions.Providers.Ethereum(ethereumProvider))
+      dispatch(Actions.Providers.IPFS(ipfsProvider))
+    }
   }
 
   // Setting Ethereum Provider Manually
@@ -51,8 +53,6 @@ class SetupComponent extends Component {
     let len = String('localhost:5001').length; // 14
     let len2 = String('104.131.53.68:5001').length // 18
 
-    console.log(len, len2);
-
     if(ipfs == undefined){
       return 'warning';
     } else if(ipfs == 'metamask' || ipfs == 'http://localhost:8545'){
@@ -65,6 +65,30 @@ class SetupComponent extends Component {
     };
   }
 
+  // Setup Providers with manual settings
+
+  setupProviders = () => {
+    let { ethProvider, ipfsProvider } = this.state;
+    let { dispatch } = this.props;
+
+    console.log(ethProvider);
+    console.log(ipfsProvider);
+
+    dispatch(Actions.Providers.Ethereum(ethProvider))
+    dispatch(Actions.Providers.IPFS(ipfsProvider))
+  }
+
+  setupSuccess = () => {
+    let { dispatch } = this.props;
+    dispatch(Actions.Providers.Setup());
+  }
+
+  editProviders = () => {
+    let { dispatch } = this.props;
+    dispatch(Actions.Providers.Ethereum(false))
+    dispatch(Actions.Providers.IPFS(false))
+  }
+
   render(){
     let { Providers } = this.props;
     let { ethereumProvider, ipfsProvider, pending, error } = Providers;
@@ -73,19 +97,36 @@ class SetupComponent extends Component {
       <Modal show={true}>
         <Modal.Header closeButton>
           <Modal.Title>Setup Providers</Modal.Title>
-          <h6>Please setup your Ethereum and IPFS backend
+          { error != undefined ? <h6>Please setup your Ethereum and IPFS backend
           here before you begin using this application.
-          </h6>
+          </h6> : <h6>Current Provider Configuration</h6> }
         </Modal.Header>
         <Modal.Body>
         {pending ?
           <div>
-            { error == undefined ? <p>Fetching Providers... one moment.</p> :
+            { error == undefined ?
+              <Grid>
+                <Row>
+                  <Col>
+                    <h3>Ethereum Provider</h3>
+                    <h6>{ethereumProvider}</h6>
+                    { ethereumProvider == 'MetaMask' ?
+                      <Image src="https://avatars3.githubusercontent.com/u/11744586?v=3&s=200" rounded/>:
+                      <Image src="http://www.bitcoinalliance.in/wp-content/uploads/2014/12/hlSEqZ1M.png" width="25%"  rounded/>
+                    }
+                  </Col>
+                  <Col>
+                    <h3>IPFS Provider</h3>
+                    <h6>{ipfsProvider}</h6>
+                    <Image src="https://ipfs.io/styles/img/ipfs-logo-white.png"  width="50%"  rounded/>
+                  </Col>
+                  <ButtonToolbar>
+                    <Button bsStyle="primary" onClick={this.setupSuccess}>Continue</Button>
+                    <Button bsStyle="default" onClick={this.editProviders}>Edit Providers</Button>
+                  </ButtonToolbar>
+                </Row>
+              </Grid> :
               <div>
-              <p>
-                Could not connect to local providers. Please set the following provider
-                information:
-              </p>
               <Input
                 type="text"
                 value={this.state.ethProvider}
@@ -127,6 +168,8 @@ class SetupComponent extends Component {
                   groupClassName="group-class"
                   labelClassName="label-class"
                   onChange={this.updateIPFSProvider} />
+                  <br/>
+                  <Button bsStyle="primary" onClick={this.setupProviders}>Setup Providers</Button>
                   </div>
             }
           </div> :

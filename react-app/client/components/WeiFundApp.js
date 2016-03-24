@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as Actions from '../lib/actions/index';
-import {Header, Footer, Setup} from './index';
+import {Header, Footer, EthereumSettings, IPFSSettings, Body} from './index';
 
 class WeiFundAppComponent extends Component {
   constructor(props) {
@@ -17,18 +17,16 @@ class WeiFundAppComponent extends Component {
     // let { Network, Providers } = this.props;
     // console.log(this.props);
     // console.log(Providers);
+    // !this.props.Views.bodyView.includes('campaign')
 
     return (
       <div>
         <Header />
-        { true ?
-          <Setup/>
-           :
-          <div>This is Where Our Body Goes</div>
-        }
-
-
+        <Body />
         <Footer />
+
+        <EthereumSettings />
+        <IPFSSettings />
       </div>
     );
   }
@@ -38,6 +36,7 @@ class WeiFundAppComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     Network : state.Network,
+    Views : state.Views,
     Providers : state.Providers
   }
 }

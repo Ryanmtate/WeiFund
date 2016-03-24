@@ -1,34 +1,59 @@
-// Predefined PROVIDERS state variables
+// Initial PROVIDERS state variables
 
-const DEFAULT_STATE = {
-  pending : true,
-  ethereumProvider : "http://localhost:8545", // http://104.236.65.136:8545/
-  ipfsProvider : "localhost:5001" // 104.131.53.68:5001
+const DEFAULT_PROVIDER_STATE = {
+  ipfsProviderPending : true,
+  ipfsProviderConnected : "localhost:5001", // 104.131.53.68:5001
+  ipfsProviderError : undefined,
+
+  ethereumProviderPending : true,
+  ethereumProviderConnected : "http://localhost:8545", // http://104.236.65.136:8545/
+  ethereumProviderError : undefined
 };
 
 
-export default function PROVIDERS(state = DEFAULT_STATE, action){
+export default function PROVIDERS(state = DEFAULT_PROVIDER_STATE, action){
   switch(action.type){
-    case 'PROVIDERS_REQUEST':
+    case 'ETHEREUM_PROVIDER_REQUEST':
       return {
         ...state,
-        pending: true
+        ethereumProviderPending: true,
+        ethereumProviderError : undefined,
+        ethereumProviderConnected : undefined
       };
-    case 'PROVIDERS_SUCCESS':
-      console.log(action.result)
+    case 'ETHEREUM_PROVIDER_SUCCESS':
       return {
         ...state,
-        pending : action.result.pending,
-        ethereumProvider : action.result.ethereumProvider,
-        ipfsProvider : action.result.ipfsProvider
+        ethereumProviderConnected : action.result.ethereumProvider,
+        ethereumProviderPending: false,
+        ethereumProviderError : undefined
       };
-    case 'PROVIDERS_FAILURE':
+    case 'ETHEREUM_PROVIDER_FAILURE':
       return {
         ...state,
-        error : action.error,
-        ethereumProvider : undefined,
-        ipfsProvider : undefined,
-        pending: true
+        ethereumProviderError : action.error,
+        ethereumProviderConnected : undefined,
+        ethereumProviderPending: true
+      };
+    case 'IPFS_PROVIDER_REQUEST':
+      return {
+        ...state,
+        ipfsProviderPending: true,
+        ipfsProviderError : undefined,
+        ipfsProviderConnected : undefined
+      };
+    case 'IPFS_PROVIDER_SUCCESS':
+      return {
+        ...state,
+        ipfsProviderConnected : action.result.ipfsProvider,
+        ipfsProviderError : undefined,
+        ipfsProviderPending: false
+      };
+    case 'IPFS_PROVIDER_FAILURE':
+      return {
+        ...state,
+        ipfsProviderError : action.error,
+        ipfsProviderConnected : undefined,
+        ipfsProviderPending: true
       };
     default:
       return state;

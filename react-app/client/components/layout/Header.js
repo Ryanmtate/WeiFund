@@ -2,25 +2,33 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import FaArrowCircleOUp from 'react-icons/lib/fa/arrow-circle-o-up';
+import * as Actions from '../../lib/actions/index';
 
 class HeaderComponent extends Component {
+
+  startCampaign = () => {
+    let { dispatch } = this.props;
+    dispatch(Actions.Views.Body('campaign-step-1'));
+  }
+
+  discoverCampaigns = () => {
+    let { dispatch } = this.props;
+    dispatch(Actions.Views.Body('discover'));
+  }
+
 
   render(){
     return (
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">WeiFund</a>
+            WeiFund <a href="#"><FaArrowCircleOUp /> </a>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight={true}>
-          <NavItem eventKey={1} href="#">Discover</NavItem>
-          <NavItem eventKey={2} href="#">Start</NavItem>
-          <NavDropdown eventKey={3} title="About" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Mission</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.3}>Contact</MenuItem>
-          </NavDropdown>
+          <NavItem eventKey={1} onClick={this.discoverCampaigns}>Discover</NavItem>
+          <NavItem eventKey={2} onClick={this.startCampaign}>Start</NavItem>
         </Nav>
       </Navbar>
     );
@@ -30,7 +38,7 @@ class HeaderComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    state : state
+    Views : state.Views
   }
 }
 

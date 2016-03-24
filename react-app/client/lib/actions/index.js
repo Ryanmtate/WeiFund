@@ -1,7 +1,11 @@
 import Network from './Network';
-import Providers from './Providers';
+import * as Providers from './Providers';
+import * as Views from './Views';
+import * as Campaign from './Campaign';
 
 export {
   Network,
-  Providers
+  Providers,
+  Views,
+  Campaign
 };

@@ -21,12 +21,15 @@ System.config({
     "bluebird": "npm:bluebird@3.3.4",
     "bootstrap": "npm:bootstrap@3.3.6",
     "core-js": "npm:core-js@1.2.6",
+    "css": "github:systemjs/plugin-css@0.1.20",
     "gulp": "npm:gulp@3.9.1",
     "gulp-jspm": "npm:gulp-jspm@0.5.8",
     "ipfs-js": "npm:ipfs-js@0.0.8",
+    "rc-steps": "npm:rc-steps@1.4.4",
     "react": "npm:react@0.14.7",
     "react-bootstrap": "npm:react-bootstrap@0.28.3",
     "react-dom": "npm:react-dom@0.14.7",
+    "react-icons": "npm:react-icons@1.0.3",
     "react-redux": "npm:react-redux@4.4.1",
     "react-router": "npm:react-router@2.0.1",
     "react-router-redux": "npm:react-router-redux@4.0.0",
@@ -1738,6 +1741,10 @@ System.config({
       "crypto": "github:jspm/nodelibs-crypto@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:rc-steps@1.4.4": {
+      "classnames": "npm:classnames@2.2.3",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:react-bootstrap@0.28.3": {
       "babel-runtime": "npm:babel-runtime@5.8.35",
       "classnames": "npm:classnames@2.2.3",
@@ -1755,6 +1762,16 @@ System.config({
     },
     "npm:react-dom@0.14.7": {
       "react": "npm:react@0.14.7"
+    },
+    "npm:react-icon-base@1.0.0": {
+      "react": "npm:react@0.14.7",
+      "react-dom": "npm:react-dom@0.14.7"
+    },
+    "npm:react-icons@1.0.3": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "react": "npm:react@0.14.7",
+      "react-dom": "npm:react-dom@0.14.7",
+      "react-icon-base": "npm:react-icon-base@1.0.0"
     },
     "npm:react-overlays@0.6.0": {
       "classnames": "npm:classnames@2.2.3",
