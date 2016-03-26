@@ -50,8 +50,6 @@ class CampaignStepTwoComponent extends Component {
   lastStep = () => {
     let { dispatch, Campaign } = this.props;
 
-    console.log(Campaign);
-
     if(Campaign.currentStep != 0){
       let step = Campaign.currentStep - 1;
       let view = Campaign.campaignProcess.steps[step].stepId;
@@ -120,7 +118,8 @@ class CampaignStepTwoComponent extends Component {
                   <div>
                   <h4>Banner Image</h4>
                   </div>}
-                help={"e.g. http://mysite.com/banner.jpg | Must be 4:3 jpg, jpeg or png greater than 1024px by 768px."}
+                help={`e.g. http://mysite.com/banner.jpg | Must be 4:3 jpg, jpeg
+                or png greater than 1024px by 768px.`}
                 bsStyle={null}
                 hasFeedback
                 ref="bannerImage"
@@ -152,7 +151,8 @@ class CampaignStepTwoComponent extends Component {
                   <div>
                   <h4>Campaign Video</h4>
                   </div>}
-                help={" e.g. https://youtu.be/miaxf6BI6Wc | Video must be YouTube or Vimeo URLs. Image must be 16:9 and at least 1024px by 768px."}
+                help={`e.g. https://youtu.be/miaxf6BI6Wc | Video must be YouTube or Vimeo URLs.
+                  Image must be 16:9 and at least 1024px by 768px.`}
                 bsStyle={null}
                 hasFeedback
                 ref="videoUrl"
