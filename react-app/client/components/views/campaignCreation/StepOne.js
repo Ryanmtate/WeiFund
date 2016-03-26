@@ -54,9 +54,6 @@ class CampaignStepOneComponent extends Component {
     let { dispatch, Campaign } = this.props;
 
     // do some validation checks on inputs...
-
-
-
     if(true){
       let step = Campaign.currentStep + 1;
       let view = Campaign.campaignProcess.steps[step].stepId;

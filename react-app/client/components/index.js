@@ -7,7 +7,7 @@ import Footer from './layout/Footer';
 import EthereumSettings from './views/providerSettings/EthereumSettings';
 import IPFSSettings from './views/providerSettings/IPFSSettings';
 import Discover from './views/Discover';
-import * as Campaign from './views/campaign/index';
+import * as CampaignCreation from './views/campaignCreation/index';
 import NoMatch from './views/NoMatch';
 
 export {
@@ -19,5 +19,5 @@ export {
   EthereumSettings,
   IPFSSettings,
   Discover,
-  Campaign
+  CampaignCreation
 };

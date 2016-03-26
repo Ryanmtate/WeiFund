@@ -30,11 +30,7 @@ class CampaignStepTwoComponent extends Component {
 
   componentDidMount() {
     let { dispatch, Views, Campaign, State } = this.props;
-
-    console.log(this.state);
-
     dispatch(Actions.LocalStore.Save(State));
-
   }
 
   updateCampaign = () => {
@@ -66,8 +62,6 @@ class CampaignStepTwoComponent extends Component {
 
   lastStep = () => {
     let { dispatch, Campaign } = this.props;
-
-    console.log(Campaign);
 
     if(Campaign.currentStep != 0){
       let step = Campaign.currentStep - 1;

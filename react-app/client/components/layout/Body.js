@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as Actions from '../../lib/actions/index';
-import { Discover, Campaign } from '../index';
+import { Discover, CampaignCreation } from '../index';
 
 class BodyComponent extends Component {
   constructor(props) {
@@ -16,15 +16,15 @@ class BodyComponent extends Component {
   render(){
     switch(this.props.Views.bodyView){
       case 'campaign-step-1':
-        return <Campaign.CampaignStepOne />
+        return <CampaignCreation.StepOne />
       case 'campaign-step-2':
-        return <Campaign.CampaignStepTwo />
+        return <CampaignCreation.StepTwo />
       case 'campaign-step-3':
-        return <Campaign.CampaignStepThree />
+        return <CampaignCreation.StepThree />
       case 'campaign-step-4':
-        return <Campaign.CampaignStepFour />
+        return <CampaignCreation.StepFour />
       case 'campaign-step-5':
-        return <Campaign.CampaignStepFive />
+        return <CampaignCreation.StepFive />
       case 'discover':
         return <Discover />
     }

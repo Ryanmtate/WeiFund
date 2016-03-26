@@ -58,8 +58,6 @@ class CampaignStepThreeComponent extends Component {
   render(){
     let { createStandardToken, createTokenController, autoDispersal, initialTokenAmount, initialTokenPrice } = this.state;
 
-    console.log(this.state);
-
     return (
       <Grid>
         <Row>
