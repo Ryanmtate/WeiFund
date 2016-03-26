@@ -33,7 +33,7 @@ class HeaderComponent extends Component {
 
   render(){
     return (
-      <Navbar>
+      <Navbar >
         <Navbar.Header>
           <Navbar.Brand>
             WeiFund <a href="#"><FaArrowCircleOUp /> </a>

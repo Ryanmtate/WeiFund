@@ -16,6 +16,7 @@ System.config({
   },
 
   map: {
+    "async": "npm:async@2.0.0-rc.2",
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bluebird": "npm:bluebird@3.3.4",
@@ -24,11 +25,14 @@ System.config({
     "clean-css": "npm:clean-css@3.4.10",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
+    "ether-pudding": "npm:ether-pudding@2.0.6",
+    "fs": "npm:fs@0.0.2",
     "gulp": "npm:gulp@3.9.1",
     "gulp-jspm": "npm:gulp-jspm@0.5.8",
     "ipfs-js": "npm:ipfs-js@0.0.8",
     "less": "github:aaike/jspm-less-plugin@0.0.5",
     "moment": "npm:moment@2.12.0",
+    "path": "npm:path@0.12.7",
     "rc-steps": "npm:rc-steps@1.4.4",
     "react": "npm:react@0.14.7",
     "react-bootstrap": "npm:react-bootstrap@0.28.3",
@@ -38,6 +42,7 @@ System.config({
     "react-router": "npm:react-router@2.0.1",
     "react-router-redux": "npm:react-router-redux@4.0.0",
     "redux": "npm:redux@3.3.1",
+    "rimraf": "npm:rimraf@2.5.2",
     "store": "npm:store@1.3.20",
     "web3": "npm:web3@0.15.3",
     "github:aaike/jspm-less-plugin@0.0.5": {
@@ -204,6 +209,11 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:async@1.5.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:async@2.0.0-rc.2": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "lodash": "npm:lodash@4.6.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:aws-sign2@0.5.0": {
@@ -695,6 +705,14 @@ System.config({
     "npm:esprima@1.1.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:ether-pudding@2.0.6": {
+      "bluebird": "npm:bluebird@3.3.4",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "node-dir": "npm:node-dir@0.1.11",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:evp_bytestokey@1.0.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -1582,6 +1600,11 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:node-dir@0.1.11": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "minimatch": "npm:minimatch@2.0.10",
+      "path": "github:jspm/nodelibs-path@0.1.0"
+    },
     "npm:node-fetch@1.4.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "encoding": "npm:encoding@0.1.12",
@@ -1695,6 +1718,10 @@ System.config({
       "graceful-fs": "npm:graceful-fs@4.1.3",
       "pify": "npm:pify@2.3.0",
       "pinkie-promise": "npm:pinkie-promise@2.0.0"
+    },
+    "npm:path@0.12.7": {
+      "process": "npm:process@0.11.2",
+      "util": "npm:util@0.10.3"
     },
     "npm:pbkdf2@3.0.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

@@ -140,7 +140,7 @@ class CampaignStepOneComponent extends Component {
                   <div>
                   <h4>Campaign Funding Goal</h4>
                   </div>}
-                help={null}
+                help={<p>Target funding goal of campaign, denominated in <a href="https://ethereum.org/ether" target="_blank">ether</a>.</p>}
                 bsStyle={null}
                 hasFeedback
                 ref="campaignFundingGoal"

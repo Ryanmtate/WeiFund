@@ -20,7 +20,7 @@ export function Save(State){
 
 export function Get(){
   let State = store.get('state');
-  
+
   return {
     type : 'GET_LOCAL_STORE',
     state : State

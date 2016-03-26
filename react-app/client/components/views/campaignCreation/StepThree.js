@@ -31,7 +31,7 @@ class CampaignStepThreeComponent extends Component {
 
   nextStep = () => {
     let { dispatch, Campaign } = this.props;
-
+    console.log(Actions);
     // do some validation checks on inputs...
     if(true){
       let step = Campaign.currentStep + 1;
@@ -40,6 +40,9 @@ class CampaignStepThreeComponent extends Component {
       dispatch(Actions.Views.Body(view));
       dispatch(Actions.Campaign.currentStep(step));
       dispatch(Actions.Campaign.updateCampaignProcess(this.state));
+
+      // Call Get Account for next step;
+      dispatch(Actions.Account.getAccounts());
     }
   }
 
@@ -57,8 +60,6 @@ class CampaignStepThreeComponent extends Component {
 
   render(){
     let { createStandardToken, createTokenController, autoDispersal, initialTokenAmount, initialTokenPrice } = this.state;
-
-    console.log(this.state);
 
     return (
       <Grid>

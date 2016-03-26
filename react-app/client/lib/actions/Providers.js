@@ -1,6 +1,6 @@
 import ipfs from 'ipfs-js';
 import Web3 from 'web3';
-var web3 = null;
+export var web3;
 
 let PROVIDER_OBJECT = {
   pending : true,

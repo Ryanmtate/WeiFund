@@ -11,6 +11,7 @@ class WeiFundAppComponent extends Component {
   componentDidMount() {
     let { dispatch } = this.props;
 
+    // Get Local Store data if available;
     dispatch(Actions.LocalStore.Get());
   }
 

@@ -46,7 +46,26 @@ const DEFAULT_CAMPAIGN_STATE = {
     createTokenController : true,
     autoDispersal : false,
     initialTokenAmount : undefined,
-    initialTokenPrice : undefined
+    initialTokenPrice : undefined,
+    TransactionOrders : [{
+      item : 'WeiFund Campaign',
+      gasCostInWei : 240000
+    }, {
+      item : 'WeiHash Registration',
+      gasCostInWei : 240000
+    }, {
+      item : 'Campaign Contribution Endpoint',
+      gasCostInWei : 100000
+    }, {
+      item : 'Operator Persona',
+      gasCostInWei : 100000
+    }, {
+      item : 'Custom Standard Token',
+      gasCostInWei : 100000
+    }, {
+      item : 'Custom Token Controller',
+      gasCostInWei : 100000
+    }]
   }
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as Actions from '../../../lib/actions/index';
 import CampaignProcess from './CampaignProcess';
-import { Grid, Row, Col, Input, Panel, Button, ButtonToolbar } from 'react-bootstrap';
+import { Grid, Row, Col, Input, Alert, Panel, Button, ButtonToolbar, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 class CampaignStepFourComponent extends Component {
@@ -10,13 +10,26 @@ class CampaignStepFourComponent extends Component {
     super(props);
     let { newCampaign } = this.props.Campaign;
     this.state = {
-      ...newCampaign
+      ...newCampaign,
+      dismissed : false
     };
   }
 
   ccomponentDidMount() {
     let { dispatch, Views, Campaign, State } = this.props;
+
+
     dispatch(Actions.LocalStore.Save(State));
+  }
+
+  handleAlertDismiss = () => {
+    this.setState({dismissed : true});
+  }
+
+  selectAccount = () => {
+    let { dispatch } = this.props;
+    let account = this.refs.selectedAccount.getValue();
+    dispatch(Actions.Account.selectAccount(account));
   }
 
   nextStep = () => {
@@ -45,6 +58,29 @@ class CampaignStepFourComponent extends Component {
   }
 
   render(){
+    let { Campaign, Account } = this.props;
+
+    console.log(Account);
+
+    var TransactionOrders = Campaign.newCampaign.TransactionOrders.map((order, index) => {
+      return (
+        <ListGroup key={order.item}>
+          <ListGroupItem>
+            <h5>{order.item}</h5>
+            <p>Estimated Gas Cost in Wei: {order.gasCostInWei}</p>
+          </ListGroupItem>
+        </ListGroup>
+      );
+    });
+
+    if(Account.accounts){
+      var accounts = Account.accounts.map((account, index) => {
+        let a = `${account.address} | ${account.balance} Ether`;
+        return (<option key={account.address} value={account.address}>{a}</option>);
+      });
+    }
+
+
     return (
       <Grid>
         <Row>
@@ -53,19 +89,39 @@ class CampaignStepFourComponent extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={6} md={6} sm={6} xs={6} >
+          <Col lg={12} md={12} sm={12} xs={12} >
+            { this.state.dismissed ? null : <Alert bsStyle="success" onDismiss={this.handleAlertDismiss}>
+              <h4>Checkout</h4>
+              <p>Here you can review the transaction orders that will be made
+                in order to setup your campaign on WeiFund.</p>
+              </Alert>
+            }
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={4} md={4} sm={4} xs={4} >
             <Panel>
-              <p>CampaignStepFour</p>
-
+              <h4>Transaction Orders</h4>
+              {TransactionOrders}
             </Panel>
           </Col>
-          <Col lg={6} md={6} sm={6} xs={6} >
+          <Col lg={8} md={8} sm={8} xs={8} >
             <Panel>
-              <ButtonToolbar>
-                <Button bsStyle={"default"} onClick={this.lastStep}>Go Back</Button>
-                <Button bsStyle={"primary"} onClick={this.nextStep}>Continue</Button>
-               </ButtonToolbar>
+              <h4>Select Checkout Account </h4>
+              { Account.accounts ?
+                <Input type="select" label="Accounts" ref="selectedAccount" onChange={this.selectAccount}>
+                  { accounts }
+                </Input> : null
+              }
             </Panel>
+          </Col>
+        </Row>
+        <Row style={{marginBottom: '100px'}}>
+          <Col lg={12} md={12} sm={12} xs={12} >
+          <ButtonToolbar >
+            <Button style={{float: 'right'}} bsStyle={"success"} onClick={this.nextStep}>Checkout</Button>
+            <Button style={{float: 'right'}} bsStyle={"default"} onClick={this.lastStep}>Go Back</Button>
+           </ButtonToolbar>
           </Col>
         </Row>
       </Grid>
@@ -77,6 +133,7 @@ class CampaignStepFourComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     State : state,
+    Account : state.Account,
     Views : state.Views,
     Campaign : state.Campaign
   }
