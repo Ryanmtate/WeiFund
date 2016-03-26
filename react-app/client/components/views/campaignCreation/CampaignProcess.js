@@ -10,15 +10,10 @@ class CampaignProcessComponent extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    let { dispatch, Views } = this.props;
-
-    console.log(Views);
-
-  }
+  componentDidMount() {}
 
   render(){
-    let { Views, Campaign } = this.props;
+    let { Campaign } = this.props;
     let { steps } = Campaign.campaignProcess;
 
     let S = steps.map((s, i) => {
@@ -36,7 +31,6 @@ class CampaignProcessComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    Views : state.Views,
     Campaign : state.Campaign
   }
 }
