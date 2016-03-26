@@ -8,10 +8,16 @@ import { Grid, Row, Col, Input, Panel, PageHeader, Button, ButtonToolbar } from 
 class CampaignStepFourComponent extends Component {
   constructor(props) {
     super(props);
+    let { newCampaign } = this.props.Campaign;
+
+    this.state = {
+      ...newCampaign
+    }
   }
 
-  componentDidMount() {
-    let { dispatch, Views, Campaign } = this.props;
+  ccomponentDidMount() {
+    let { dispatch, Views, Campaign, State } = this.props;
+    dispatch(Actions.LocalStore.Save(State));
   }
 
   nextStep = () => {
@@ -71,6 +77,7 @@ class CampaignStepFourComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    State : state,
     Views : state.Views,
     Campaign : state.Campaign
   }

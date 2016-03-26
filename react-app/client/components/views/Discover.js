@@ -11,8 +11,6 @@ class DiscoverComponent extends Component {
   componentDidMount() {
     let { dispatch, Views } = this.props;
 
-    console.log(Views);
-
   }
 
   render(){

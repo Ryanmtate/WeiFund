@@ -13,21 +13,18 @@ class CampaignStepOneComponent extends Component {
     let { newCampaign } = this.props.Campaign;
 
     this.state = {
-      name : newCampaign.name,
-      expiry : {
-        unix : newCampaign.expiry.unix,
-        local : newCampaign.expiry.local
-      },
-      fundingGoal : newCampaign.fundingGoal,
-      contributionEndpoint : {
-        active : newCampaign.contributionEndpoint.active,
-        address : newCampaign.contributionEndpoint.address
-      }
+      ...newCampaign
     }
   }
 
   componentDidMount() {
-    let { dispatch, Views, Campaign } = this.props;
+    let { dispatch, Views, Campaign, LocalStore } = this.props;
+
+    // Load Previous State Information
+    if(LocalStore.Campaign){
+      this.setState({...LocalStore.Campaign.newCampaign});
+    }
+
   }
 
   updateCampaign = () =>{
@@ -47,17 +44,18 @@ class CampaignStepOneComponent extends Component {
       fundingGoal : this.refs.campaignFundingGoal.getValue(),
       beneficiary : this.refs.campaignBeneficiary.getValue(),
       contributionEndpoint : {
-        active : this.refs.contributionEndpoint.getValue()
+        active : this.refs.contributionEndpoint.refs.input.checked
       }
     })
   }
+
 
   nextStep = () => {
     let { dispatch, Campaign } = this.props;
 
     // do some validation checks on inputs...
 
-    console.log(this.state);
+
 
     if(true){
       let step = Campaign.currentStep + 1;
@@ -65,6 +63,7 @@ class CampaignStepOneComponent extends Component {
 
       dispatch(Actions.Views.Body(view));
       dispatch(Actions.Campaign.currentStep(step));
+      dispatch(Actions.Campaign.updateCampaignProcess(this.state));
     }
   }
 
@@ -154,6 +153,7 @@ class CampaignStepOneComponent extends Component {
             <Panel>
               <Input
                 type="checkbox"
+                checked={contributionEndpoint.active}
                 value={contributionEndpoint.active}
                 placeholder={""}
                 label={"Campaign Contribution Endpoint"}
@@ -169,7 +169,7 @@ class CampaignStepOneComponent extends Component {
             </Panel>
           </Col>
         </Row>
-        <Row>
+        <Row style={{marginBottom: '100px'}}>
           <Col lg={12} md={12} sm={12} xs={12} >
           <ButtonToolbar >
             <Button style={{float: 'right'}} bsStyle={"primary"} onClick={this.nextStep}>Continue</Button>
@@ -184,6 +184,7 @@ class CampaignStepOneComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    LocalStore : state.LocalStore,
     Views : state.Views,
     Campaign : state.Campaign
   }

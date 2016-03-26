@@ -1,5 +1,3 @@
-import Promise from 'bluebird';
-
 export default function NETWORK(){
   return {
     types : ['NETWORK_REQUEST', 'NETWORK_SUCCESS', 'NETWORK_FAILURE'],

@@ -10,7 +10,8 @@ class WeiFundAppComponent extends Component {
 
   componentDidMount() {
     let { dispatch } = this.props;
-    // dispatch(Actions.NETWORK());
+
+    dispatch(Actions.LocalStore.Get());
   }
 
   render(){
@@ -18,6 +19,7 @@ class WeiFundAppComponent extends Component {
     // console.log(this.props);
     // console.log(Providers);
     // !this.props.Views.bodyView.includes('campaign')
+    let { LocalStore } = this.props;
 
     return (
       <div>
@@ -35,6 +37,7 @@ class WeiFundAppComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    LocalStore : state.LocalStore,
     Network : state.Network,
     Views : state.Views,
     Providers : state.Providers

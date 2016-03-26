@@ -2,7 +2,7 @@ const DEFAULT_CAMPAIGN_STATE = {
   currentStep : 0,
   campaignProcess : {
     steps : [{
-      title : 'Campaign Basics',
+      title : 'Basics',
       description : 'Here you can start your WeiFund campaign. Fill out your basic campaign information below.',
       stepId : 'campaign-step-1'
     }, {
@@ -32,9 +32,21 @@ const DEFAULT_CAMPAIGN_STATE = {
     beneficiary: undefined,
     fundingGoal: undefined,
     contributionEndpoint: {
-      active : true,
+      active : false,
       address : undefined
-    }
+    },
+    operatorPersona : undefined,
+    websiteUrl : undefined,
+    bannerImage : undefined,
+    profileImage : undefined,
+    videoUrl : undefined,
+    description : undefined,
+    projectDetails : undefined,
+    createStandardToken : true,
+    createTokenController : true,
+    autoDispersal : false,
+    initialTokenAmount : undefined,
+    initialTokenPrice : undefined
   }
 }
 
@@ -44,6 +56,11 @@ export default function CAMPAIGN(state = DEFAULT_CAMPAIGN_STATE, action){
       return {
         ...state,
         currentStep : action.currentStep
+      };
+    case 'UPDATE_CAMPAIGN':
+      return {
+        ...state,
+        newCampaign : action.newCampaign
       };
     default:
       return state;

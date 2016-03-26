@@ -67,6 +67,7 @@ class CampaignStepFiveComponent extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    State : state,
     Views : state.Views,
     Campaign : state.Campaign
   }

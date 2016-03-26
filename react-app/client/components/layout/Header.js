@@ -6,6 +6,16 @@ import FaArrowCircleOUp from 'react-icons/lib/fa/arrow-circle-o-up';
 import * as Actions from '../../lib/actions/index';
 
 class HeaderComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {}
+  }
+
+
+  componentDidMount(){
+    console.log('Welcome to WeiFund. :)')
+  }
+
 
   startCampaign = () => {
     let { dispatch, Campaign } = this.props;
