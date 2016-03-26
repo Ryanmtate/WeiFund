@@ -9,12 +9,10 @@ import { Grid, Row, Col, Input, Panel, PageHeader, Button, ButtonToolbar, Form }
 class CampaignStepOneComponent extends Component {
   constructor(props) {
     super(props);
-
     let { newCampaign } = this.props.Campaign;
-
     this.state = {
       ...newCampaign
-    }
+    };
   }
 
   componentDidMount() {
@@ -54,6 +52,9 @@ class CampaignStepOneComponent extends Component {
     let { dispatch, Campaign } = this.props;
 
     // do some validation checks on inputs...
+
+
+
     if(true){
       let step = Campaign.currentStep + 1;
       let view = Campaign.campaignProcess.steps[step].stepId;

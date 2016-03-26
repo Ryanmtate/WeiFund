@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as Actions from '../../../lib/actions/index';
 import CampaignProcess from './CampaignProcess';
-import { Grid, Row, Col, Input, Panel, PageHeader, Button, ButtonToolbar } from 'react-bootstrap';
+import { Grid, Row, Col, Input, Panel, Button, ButtonToolbar } from 'react-bootstrap';
 
 
 class CampaignStepThreeComponent extends Component {
   constructor(props) {
     super(props);
-    let { newCampaign } = this.props.Campaign
+    let { newCampaign } = this.props.Campaign;
     this.state = {
       ...newCampaign
-    }
+    };
   }
 
   componentDidMount() {
@@ -57,6 +57,8 @@ class CampaignStepThreeComponent extends Component {
 
   render(){
     let { createStandardToken, createTokenController, autoDispersal, initialTokenAmount, initialTokenPrice } = this.state;
+
+    console.log(this.state);
 
     return (
       <Grid>
