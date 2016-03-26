@@ -4,19 +4,6 @@ import * as Actions from '../../../lib/actions/index';
 import CampaignProcess from './CampaignProcess';
 import { Grid, Row, Col, Input, Panel, PageHeader, Button, ButtonToolbar, OverlayTrigger, Popover } from 'react-bootstrap';
 
-class OperatorPersonaPopover extends Component {
-  render(){
-    return (<OverlayTrigger trigger="click" placement="right" overlay={
-          <Popover title="Operator Persona">
-            <p>This is your campaign operator identity,
-            we recommend having a persona so that contributors can see who you are.
-            This persona can be for either a person or organization.</p>
-          </Popover>
-        }> <Button bsStyle="default">?</Button> </OverlayTrigger>);
-  }
-}
-
-
 class CampaignStepTwoComponent extends Component {
   constructor(props) {
     super(props);
@@ -62,6 +49,8 @@ class CampaignStepTwoComponent extends Component {
 
   lastStep = () => {
     let { dispatch, Campaign } = this.props;
+
+    console.log(Campaign);
 
     if(Campaign.currentStep != 0){
       let step = Campaign.currentStep - 1;
