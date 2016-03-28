@@ -18,7 +18,6 @@ class CampaignStepFourComponent extends Component {
   ccomponentDidMount() {
     let { dispatch, Views, Campaign, State } = this.props;
 
-
     dispatch(Actions.LocalStore.Save(State));
   }
 
@@ -42,6 +41,7 @@ class CampaignStepFourComponent extends Component {
 
       dispatch(Actions.Views.Body(view));
       dispatch(Actions.Campaign.currentStep(step));
+      dispatch(Actions.Contract.Contracts());
     }
   }
 
@@ -58,9 +58,9 @@ class CampaignStepFourComponent extends Component {
   }
 
   render(){
-    let { Campaign, Account } = this.props;
+    let { Campaign, Account, Contract } = this.props;
 
-    console.log(Account);
+    console.log(Contract);
 
     var TransactionOrders = Campaign.newCampaign.TransactionOrders.map((order, index) => {
       return (
@@ -135,7 +135,8 @@ const mapStateToProps = (state) => {
     State : state,
     Account : state.Account,
     Views : state.Views,
-    Campaign : state.Campaign
+    Campaign : state.Campaign,
+    Contract : state.Contract
   }
 }
 

@@ -6,13 +6,14 @@ var path = require('path');
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 var async = require('async');
-var Pudding = require('ether-pudding');
+// var Pudding = require('ether-pudding');
 var PuddingGenerator = require('ether-pudding/generator');
-
-var ContractDirectory = path.normalize(__dirname)+'/client/contracts'
+var ContractDirectory = path.normalize(__dirname)+'/client/lib/contracts'
 var SolidityDirectory = ContractDirectory+'/solidity';
 var solJSDirectory = ContractDirectory+'/sol-js';
 var compiledDirectory = ContractDirectory+'/compiled';
+
+var ContractsConfig = require('./ContractsConfig');
 
 
 var ContractGenerator = new Object();
@@ -26,21 +27,25 @@ fs.readdirAsync(SolidityDirectory).then((contracts) => {
       async.forEach(Object.keys(compiled.contracts), (C, cb) => {
         var abi = JSON.parse(compiled.contracts[C].interface);
         var binary = compiled.contracts[C].bytecode;
-
-        web3.eth.contract(abi).new({from : web3.eth.coinbase, data : binary, gas : 3141592}, (error, deployed) => {
-          if(error){throw error;}
-          if(!deployed.address){
-            console.log(`Deploying ${C}... transaction hash: ${deployed.transactionHash}`);
-          } else {
-            console.log(`Deployed ${C} at address: ${deployed.address}`);
-            ContractGenerator[C] = {
-              abi : abi,
-              binary : binary,
-              address : deployed.address
-            };
-            cb();
-          }
-        });
+        ContractGenerator[C] = {
+          abi : abi,
+          binary : binary,
+          address : undefined
+        };
+        if(ContractsConfig.deploy.indexOf(C) != -1){
+          web3.eth.contract(abi).new({from : web3.eth.coinbase, data : binary, gas : 3141592}, (error, deployed) => {
+            if(error){throw error;}
+            if(!deployed.address){
+              console.log(`Deploying ${C}... transaction hash: ${deployed.transactionHash}`);
+            } else {
+              console.log(`Deployed ${C} at address: ${deployed.address}`);
+              ContractGenerator[C].address = deployed.address;
+              cb();
+            }
+          });
+        } else {
+          cb();
+        }
       }, (error) => {
         if(error){throw error;}
 

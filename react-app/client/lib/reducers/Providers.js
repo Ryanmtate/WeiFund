@@ -7,10 +7,7 @@ const DEFAULT_PROVIDER_STATE = {
 
   ethereumProviderPending : true,
   ethereumProviderConnected : "http://localhost:8545", // http://104.236.65.136:8545/
-  ethereumProviderError : undefined,
-
-  contractsLoaded : undefined,
-  contractsError : undefined
+  ethereumProviderError : undefined
 };
 
 

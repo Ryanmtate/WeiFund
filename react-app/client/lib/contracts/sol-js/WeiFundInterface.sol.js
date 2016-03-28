@@ -8,7 +8,7 @@
     abi: [{"anonymous":false,"inputs":[{"indexed":true,"name":"_campaignID","type":"uint256"},{"indexed":true,"name":"_owner","type":"address"}],"name":"CampaignCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_campaignID","type":"uint256"},{"indexed":true,"name":"_contributor","type":"address"},{"indexed":false,"name":"_amountContributed","type":"uint256"}],"name":"Contributed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_campaignID","type":"uint256"},{"indexed":true,"name":"_contributor","type":"address"},{"indexed":false,"name":"_amountRefunded","type":"uint256"}],"name":"Refunded","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_campaignID","type":"uint256"},{"indexed":true,"name":"_beneficiary","type":"address"},{"indexed":false,"name":"_amountPaid","type":"uint256"}],"name":"PaidOut","type":"event"}],
     binary: "606060405260068060106000396000f3606060405200",
     unlinked_binary: "606060405260068060106000396000f3606060405200",
-    address: "0xef10313c2830b64d1cb9a95bada3e4f91d8f872e",
+    address: "",
     generated_with: "2.0.6",
     contract_name: "WeiFundInterface"
   };

@@ -4,6 +4,7 @@ import Views from './Views';
 import Campaign from './Campaign';
 import LocalStore from './LocalStore';
 import Account from './Account';
+import Contract from './Contract';
 
 export {
   Network,
@@ -11,5 +12,6 @@ export {
   Views,
   Campaign,
   LocalStore,
-  Account
+  Account,
+  Contract
 };
