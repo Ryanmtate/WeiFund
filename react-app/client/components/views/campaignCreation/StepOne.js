@@ -62,6 +62,7 @@ class CampaignStepOneComponent extends Component {
       dispatch(Actions.Views.Body(view));
       dispatch(Actions.Campaign.currentStep(step));
       dispatch(Actions.Campaign.updateCampaignProcess(this.state));
+      dispatch(Actions.Providers.Contracts());
     }
   }
 

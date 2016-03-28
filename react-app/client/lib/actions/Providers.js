@@ -1,12 +1,10 @@
 import ipfs from 'ipfs-js';
 import Web3 from 'web3';
-export var web3;
+import * as Pudding from 'ether-pudding';
+import contracts from '../../contracts/compiled/contracts.json!';
+import async from 'async';
+var web3;
 
-let PROVIDER_OBJECT = {
-  pending : true,
-  ethereumProvider : "",
-  ipfsProvider : ""
-};
 
 function SetupEthereumProvider(ethereumProvider){
   return new Promise((resolve, reject) => {
@@ -15,13 +13,15 @@ function SetupEthereumProvider(ethereumProvider){
     if(window.web3){
       web3 = new Web3(window.web3.currentProvider);
     } else {
-      // set the provider you want from Web3.providers
       web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
-    }
+    };
 
     web3.eth.getAccounts((error, result) => {
       if(error){reject(error)}
-      console.log(result);
+
+      // Set Pudding for Contract Provider
+      Pudding.setWeb3(web3);
+
       if(web3.currentProvider.readable){
         resolve('MetaMask');
       } else {
@@ -58,8 +58,7 @@ export function Ethereum(ethereumProvider){
     promise : () => {
       return new Promise((resolve, reject) => {
         SetupEthereumProvider(ethereumProvider).then((ethereumProviderSet) => {
-          PROVIDER_OBJECT.ethereumProvider = ethereumProviderSet;
-          resolve(PROVIDER_OBJECT);
+          resolve(ethereumProviderSet);
         }).catch((error) => {
           reject(error);
         });
@@ -74,8 +73,7 @@ export function IPFS(ipfsProvider){
     promise : () => {
       return new Promise((resolve, reject) => {
         SetupIPFSProvider(ipfsProvider).then((ipfsProviderSet) => {
-          PROVIDER_OBJECT.ipfsProvider = ipfsProviderSet;
-          resolve(PROVIDER_OBJECT);
+          resolve(ipfsProviderSet);
         }).catch((error) => {
           reject(error);
         });
@@ -88,5 +86,34 @@ export function Setup(){
   return {
     type : 'SETUP_SUCCESS',
     pending : false
+  }
+}
+
+export function Contracts(){
+  return {
+    types : ['CONTRACT_PROVIDER_REQUEST', 'CONTRACT_PROVIDER_SUCCESS', 'CONTRACT_PROVIDER_FAILURE'],
+    promise : () => {
+      return new Promise((resolve, reject) => {
+        async.forEach(Object.keys(contracts), (contract, cb) => {
+          if(contract == 'WeiFund'){
+              let { abi, binary } = contracts[contract];
+              // let WeiFund = Pudding.whisk({abi : abi, binary : binary, gasLimit : 3141592 });
+              // let test = web3.eth.contract(abi).new({});
+              let { defaultAccount, coinbase } = web3.eth;
+              
+              if(!defaultAccount){
+                web3.eth.defaultAccount = coinbase;
+              }
+
+
+          };
+          cb();
+        }, (error, c) => {
+          if(error){reject(error)}
+          resolve(c);
+        });
+
+      });
+    }
   }
 }

@@ -58,8 +58,10 @@ class CampaignStepTwoComponent extends Component {
   }
 
   render(){
-    let { State } = this.props;
+    let { State, Providers } = this.props;
     let { operatorPersona, websiteUrl, bannerImage, profileImage, videoUrl, description, projectDetails} = this.state;
+
+    console.log(Providers);
 
     return (
       <Grid>
@@ -220,7 +222,8 @@ const mapStateToProps = (state) => {
     State : state,
     LocalStore : state.LocalStore,
     Views : state.Views,
-    Campaign : state.Campaign
+    Campaign : state.Campaign,
+    Providers : state.Providers
   }
 }
 

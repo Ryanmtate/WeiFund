@@ -30,6 +30,7 @@ System.config({
     "gulp": "npm:gulp@3.9.1",
     "gulp-jspm": "npm:gulp-jspm@0.5.8",
     "ipfs-js": "npm:ipfs-js@0.0.8",
+    "json": "github:systemjs/plugin-json@0.1.0",
     "less": "github:aaike/jspm-less-plugin@0.0.5",
     "moment": "npm:moment@2.12.0",
     "path": "npm:path@0.12.7",

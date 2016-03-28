@@ -7,7 +7,10 @@ const DEFAULT_PROVIDER_STATE = {
 
   ethereumProviderPending : true,
   ethereumProviderConnected : "http://localhost:8545", // http://104.236.65.136:8545/
-  ethereumProviderError : undefined
+  ethereumProviderError : undefined,
+
+  contractsLoaded : undefined,
+  contractsError : undefined
 };
 
 
@@ -23,7 +26,7 @@ export default function PROVIDERS(state = DEFAULT_PROVIDER_STATE, action){
     case 'ETHEREUM_PROVIDER_SUCCESS':
       return {
         ...state,
-        ethereumProviderConnected : action.result.ethereumProvider,
+        ethereumProviderConnected : action.result,
         ethereumProviderPending: false,
         ethereumProviderError : undefined
       };
@@ -44,7 +47,7 @@ export default function PROVIDERS(state = DEFAULT_PROVIDER_STATE, action){
     case 'IPFS_PROVIDER_SUCCESS':
       return {
         ...state,
-        ipfsProviderConnected : action.result.ipfsProvider,
+        ipfsProviderConnected : action.result,
         ipfsProviderError : undefined,
         ipfsProviderPending: false
       };
@@ -54,6 +57,24 @@ export default function PROVIDERS(state = DEFAULT_PROVIDER_STATE, action){
         ipfsProviderError : action.error,
         ipfsProviderConnected : undefined,
         ipfsProviderPending: true
+      };
+    case 'CONTRACT_PROVIDER_REQUEST':
+      return {
+        ...state,
+        contractsLoaded : undefined,
+        contractsError : undefined
+      };
+    case 'CONTRACT_PROVIDER_SUCCESS':
+      return {
+        ...state,
+        contractsLoaded : action.result,
+        contractsError : undefined
+      };
+    case 'CONTRACT_PROVIDER_FAILURE':
+      return {
+        ...state,
+        contractsLoaded : undefined,
+        contractsError : action.error
       };
     default:
       return state;
