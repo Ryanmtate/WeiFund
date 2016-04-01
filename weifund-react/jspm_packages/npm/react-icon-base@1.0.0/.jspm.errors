@@ -1,0 +1,19 @@
+MultipleErrors: /Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:1:1: Unexpected reserved word import
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:1:8: Semi-colon expected
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:1:14: Semi-colon expected
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:1:19: Semi-colon expected
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:15:13: Unexpected token <
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:15:19: Unexpected token ...
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:15:27: Unexpected token }
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:15:30: Unexpected token ...
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:15:43: Unexpected token }
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:25: Unexpected token {
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:35: Unexpected token ,
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:26: Unexpected token ...
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:37: Semi-colon expected
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:37: Unexpected token ...
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:40: Semi-colon expected
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:17:59: Unexpected token >
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:19:13: Unexpected token <
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:20:9: Unexpected token )
+/Users/ryan/.jspm/packages/npm/react-icon-base@1.0.0/index.js:21:5: Unexpected token }

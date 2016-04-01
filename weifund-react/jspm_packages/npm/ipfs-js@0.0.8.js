@@ -1,0 +1,1 @@
+module.exports = require("npm:ipfs-js@0.0.8/ipfs.js");

@@ -1,0 +1,15 @@
+/* */ 
+(function(process) {
+  'use strict';
+  var fs = process.browser ? require('fs') : require('graceful-fs');
+  function readLink(file, opt, cb) {
+    fs.readlink(file.path, function(err, target) {
+      if (err) {
+        return cb(err);
+      }
+      file.symlink = target;
+      return cb(null, file);
+    });
+  }
+  module.exports = readLink;
+})(require('process'));

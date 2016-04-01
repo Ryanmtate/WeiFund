@@ -1,0 +1,53 @@
+{
+  "name": "ipfs-api",
+  "version": "2.3.2",
+  "description": "A client library for the IPFS API",
+  "main": "src/index.js",
+  "dependencies": {
+    "brfs": "^1.4.0",
+    "merge-stream": "^1.0.0",
+    "multiaddr": "^1.0.0",
+    "multipart-stream": "^2.0.0",
+    "vinyl": "^0.5.1",
+    "vinyl-fs-browser": "^0.1.0",
+    "vinyl-multipart-stream": "^1.2.5"
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ipfs/node-ipfs-api"
+  },
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "ipfsd-ctl": "^0.3.3",
+    "mocha": "^2.2.5",
+    "pre-commit": "^1.0.6",
+    "standard": "^3.3.2",
+    "uglify-js": "^2.4.24"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/.bin/standard --format",
+    "build": "./node_modules/.bin/browserify -t brfs -s ipfsAPI -e ./src/index.js | tee dist/ipfsapi.js | ./node_modules/.bin/uglifyjs -m > dist/ipfsapi.min.js"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "keywords": [
+    "ipfs"
+  ],
+  "author": "Matt Bell <mappum@gmail.com>",
+  "contributors": [
+    "Travis Person <travis.person@gmail.com>",
+    "Jeromy Jonson <why@ipfs.io>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ipfs/node-ipfs-api/issues"
+  },
+  "homepage": "https://github.com/ipfs/node-ipfs-api"
+}

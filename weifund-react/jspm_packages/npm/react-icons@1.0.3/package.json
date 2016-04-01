@@ -1,0 +1,58 @@
+{
+  "name": "react-icons",
+  "version": "1.0.3",
+  "description": "svg react icons of popular icon packs using ES6 imports",
+  "main": "lib/icons.js",
+  "jsnext:main": "icons.js",
+  "scripts": {
+    "docs": "babel-node --stage 0 ./bin/generate-docs",
+    "build": "node ./bin/create | xargs babel --out-dir lib",
+    "prepublish": "npm run build",
+    "eslint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gorangajic/react-icons.git"
+  },
+  "keywords": [
+    "react",
+    "icons",
+    "inline",
+    "svg",
+    "font",
+    "awesome",
+    "material",
+    "design"
+  ],
+  "author": "Goran Gajic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gorangajic/react-icons/issues"
+  },
+  "homepage": "https://github.com/gorangajic/react-icons#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.3",
+    "camelcase": "^1.2.1",
+    "capitalize": "^1.0.0",
+    "cheerio": "^0.19.0",
+    "classnames": "^2.2.0",
+    "decamelize": "1.1.1",
+    "eslint": "^1.7.3",
+    "eslint-config-airbnb": "^0.1.0",
+    "eslint-plugin-react": "^3.6.3",
+    "glob": "^5.0.15",
+    "gulp": "^3.9.0",
+    "marky-markdown": "https://github.com/npm/marky-markdown",
+    "material-design-lite": "^1.0.5",
+    "svg-scaler": "gorangajic/svg-scaler#take-size-viewbox",
+    "underscore": "^1.8.3"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "dependencies": {
+    "react-icon-base": "1.0.0"
+  }
+}

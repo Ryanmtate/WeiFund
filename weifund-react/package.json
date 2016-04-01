@@ -1,0 +1,68 @@
+{
+  "name": "weifund",
+  "version": "1.0.0",
+  "description": "A decentralized, fully transparent, open source crowdfunding DApp built on Ethereum.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeiFund/WeiFund.git"
+  },
+  "keywords": [
+    "WeiFund",
+    "Ethereum",
+    "ConsenSys",
+    "crowdfunding"
+  ],
+  "author": "Nick Dodson, Ryan Tate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WeiFund/WeiFund/issues"
+  },
+  "homepage": "https://github.com/WeiFund/WeiFund#readme",
+  "devDependencies": {
+    "jspm": "^0.16.32"
+  },
+  "jspm": {
+    "dependencies": {
+      "ansi-styles": "npm:ansi-styles@^2.2.1",
+      "async": "npm:async@^2.0.0-rc.2",
+      "bootstrap-less": "github:distros/bootstrap-less@^3.3.9",
+      "concat-stream": "npm:concat-stream@^1.5.1",
+      "css": "github:systemjs/plugin-css@^0.1.20",
+      "ether-pudding": "npm:ether-pudding@^2.0.6",
+      "ipfs-api": "npm:ipfs-api@^2.13.2",
+      "ipfs-js": "npm:ipfs-js@^0.0.8",
+      "json": "github:systemjs/plugin-json@^0.1.0",
+      "less": "github:aaike/jspm-less-plugin@^0.0.5",
+      "moment": "npm:moment@^2.12.0",
+      "rc-steps": "npm:rc-steps@^1.4.4",
+      "react": "npm:react@^0.14.8",
+      "react-bootstrap": "npm:react-bootstrap@^0.28.5",
+      "react-dom": "npm:react-dom@^0.14.8",
+      "react-icons": "npm:react-icons@^1.0.3",
+      "react-redux": "npm:react-redux@^4.4.1",
+      "react-router": "npm:react-router@^2.0.1",
+      "react-router-redux": "npm:react-router-redux@^4.0.1",
+      "readable-stream": "npm:readable-stream@^2.0.6",
+      "redux": "npm:redux@^3.3.1",
+      "rimraf": "npm:rimraf@^2.5.2",
+      "store": "npm:store@^1.3.20",
+      "web3": "npm:web3@^0.15.3"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "dependencies": {
+    "async": "^1.5.2",
+    "ether-pudding": "^2.0.6",
+    "jsonfile": "^2.2.3",
+    "solc": "^0.1.6",
+    "web3": "^0.15.3"
+  }
+}

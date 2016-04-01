@@ -1,0 +1,33 @@
+{
+  "name": "vinyl-multipart-stream",
+  "version": "1.2.6",
+  "description": "vinyl multipart stream",
+  "main": "index.js",
+  "bin": {
+    "fs2multipart": "cli.js"
+  },
+  "dependencies": {
+    "duplexify": "^3.4.2",
+    "multipart-stream": "^2.0.0",
+    "vinyl-fs-that-respects-files": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbenet/node-vinyl-multipart-stream.git"
+  },
+  "keywords": [
+    "vinyl",
+    "multipart",
+    "stream"
+  ],
+  "author": "Juan Benet <juan@benet.ai> (http://juan.benet.ai/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbenet/node-vinyl-multipart-stream/issues"
+  },
+  "homepage": "https://github.com/jbenet/node-vinyl-multipart-stream"
+}

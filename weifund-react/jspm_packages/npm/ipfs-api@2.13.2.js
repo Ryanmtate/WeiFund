@@ -1,0 +1,1 @@
+module.exports = require("npm:ipfs-api@2.13.2/src/index.js");

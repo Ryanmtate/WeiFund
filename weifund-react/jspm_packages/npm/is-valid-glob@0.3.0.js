@@ -1,0 +1,1 @@
+module.exports = require("npm:is-valid-glob@0.3.0/index.js");

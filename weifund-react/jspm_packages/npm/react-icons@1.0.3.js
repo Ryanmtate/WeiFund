@@ -1,0 +1,1 @@
+module.exports = require("npm:react-icons@1.0.3/lib/icons.js");

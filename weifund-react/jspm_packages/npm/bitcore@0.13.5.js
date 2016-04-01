@@ -1,0 +1,1 @@
+module.exports = require("npm:bitcore@0.13.5/index.js");

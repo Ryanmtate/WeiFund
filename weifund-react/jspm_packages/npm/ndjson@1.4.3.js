@@ -1,0 +1,1 @@
+module.exports = require("npm:ndjson@1.4.3/index.js");

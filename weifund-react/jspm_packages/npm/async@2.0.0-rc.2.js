@@ -1,0 +1,1 @@
+module.exports = require("npm:async@2.0.0-rc.2/dist/async.js");

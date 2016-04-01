@@ -1,0 +1,1 @@
+module.exports = require("npm:vinyl-multipart-stream@1.2.6/index.js");

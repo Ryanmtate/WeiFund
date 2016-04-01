@@ -1,0 +1,1 @@
+module.exports = require("npm:merge-stream@0.1.8/index.js");

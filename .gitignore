@@ -1,6 +1,7 @@
 app/.meteor/local
 app/standalone
-react-app/node_modules
-react-app/jspm_packages
+weifund-react/node_modules
+weifund-react/jspm_packages
+weifund-react/config.js
 standalone
 settings.md

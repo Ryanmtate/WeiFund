@@ -1,0 +1,1 @@
+module.exports = require("npm:multipart-stream@2.0.1/index.js");

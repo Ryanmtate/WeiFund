@@ -1,0 +1,1 @@
+module.exports = require("npm:bs58@2.0.0/lib/bs58.js");

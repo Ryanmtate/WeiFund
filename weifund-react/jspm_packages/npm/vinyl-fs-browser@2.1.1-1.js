@@ -1,0 +1,1 @@
+module.exports = require("npm:vinyl-fs-browser@2.1.1-1/index.js");

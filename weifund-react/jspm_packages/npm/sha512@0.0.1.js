@@ -1,0 +1,1 @@
+module.exports = require("npm:sha512@0.0.1/lib/index.js");

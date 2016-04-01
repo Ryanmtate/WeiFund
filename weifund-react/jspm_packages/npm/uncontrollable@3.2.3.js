@@ -1,0 +1,1 @@
+module.exports = require("npm:uncontrollable@3.2.3/index.js");

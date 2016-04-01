@@ -1,0 +1,1 @@
+module.exports = require("npm:lodash._baseiteratee@4.5.2/index");
