@@ -60,7 +60,7 @@ class CampaignStepFourComponent extends Component {
   render(){
     let { Campaign, Account, Contract } = this.props;
 
-    console.log(Contract);
+    console.log(Campaign);
 
     var TransactionOrders = Campaign.newCampaign.TransactionOrders.map((order, index) => {
       return (
