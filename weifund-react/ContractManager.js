@@ -6,7 +6,6 @@ var path = require('path');
 var Web3 = require('web3');
 var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 var async = require('async');
-
 var Pudding = require('ether-pudding');
 var PuddingGenerator = require('ether-pudding/generator');
 var PuddingLoader = require('ether-pudding/loader');
@@ -15,8 +14,9 @@ var SolidityDirectory = ContractDirectory+'/solidity';
 var solJSDirectory = ContractDirectory+'/sol-js';
 var WeiFundContracts = require(ContractDirectory+'/sol-js/index.cjs.js');
 var compiledDirectory = ContractDirectory+'/compiled';
-var ContractsConfig = require('./ContractsConfig');
 var ContractGenerator = new Object();
+
+
 
 function CompileContracts(){
   return new Promise((resolve, reject) => {
@@ -30,9 +30,12 @@ function CompileContracts(){
           async.forEach(Object.keys(compiled.contracts), (C, cb) => {
             var abi = JSON.parse(compiled.contracts[C].interface);
             var binary = compiled.contracts[C].bytecode;
+            var gasEstimates = compiled.contracts[C].gasEstimates;
+
             ContractGenerator[C] = {
               abi : abi,
               binary : binary,
+              gasEstimates : gasEstimates,
               address : undefined
             };
             cb();
@@ -72,6 +75,7 @@ function DeployWeiFundContracts(){
       return WeiFund.new(SendFrom);
     }).then((WeiFund) => {
       DeployedContracts['WeiFund'] = WeiFund;
+      console.log(`Deployed WeiFund at: ${WeiFund.address}`);
       var WeiHash = WeiFundContracts.WeiHash;
       WeiHash.load(Pudding);
       WeiFundAddr = WeiFund.address;
@@ -80,7 +84,7 @@ function DeployWeiFundContracts(){
       return WeiHash.new(WeiFundAddr, SendFrom);
     }).then((WeiHash) => {
       DeployedContracts['WeiHash'] = WeiHash;
-
+      console.log(`Deployed WeiHash at: ${WeiHash.address}`);
       // Check WeiHash was constructed with WeiFund Address
       return WeiHash.weifundAddr.call();
     }).then((WeiFundAddress) => {
@@ -93,11 +97,26 @@ function DeployWeiFundContracts(){
       return WeiAccounts.new(WeiFundAddress, SendFrom);
     }).then((WeiAccounts) => {
       DeployedContracts['WeiAccounts'] = WeiAccounts;
-
-      // Check WeiAccounts was constructed with WeiFund Address
+      console.log(`Deployed WeiAccounts at: ${WeiAccounts.address}`);
       return WeiAccounts.weifund.call();
+
     }).then((WeiFundAddress) => {
+
       if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in WeiAccounts! Warning!!!")}
+
+      var PersonaRegistry = WeiFundContracts.PersonaRegistry;
+      PersonaRegistry.load(Pudding);
+
+      return PersonaRegistry.new(WeiFundAddr, SendFrom);
+
+    }).then((PersonaRegistry) => {
+      DeployedContracts['PersonaRegistry'] = PersonaRegistry;
+      console.log(`Deployed PersonaRegistry at: ${PersonaRegistry.address}`);
+      return PersonaRegistry.previousPublishedVersion.call();
+
+    }).then((WeiFundAddress) => {
+      if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in PersonaRegistry! Warning!!!")}
+
       async.forEach(Object.keys(DeployedContracts), (contract, cb) => {
         ContractGenerator[contract].address = DeployedContracts[contract].address
         cb();
@@ -118,7 +137,7 @@ function DeployWeiFundContracts(){
 
 
 DeployWeiFundContracts().then((ContractGenerator) => {
-  console.log(ContractGenerator);
+  console.log("WeiFund Contracts Deployed & Saved.");
 }).catch((error) => {
   console.log("Error: "+error);
 });

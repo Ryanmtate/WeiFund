@@ -59,15 +59,18 @@ class CampaignStepFourComponent extends Component {
 
   render(){
     let { Campaign, Account, Contract } = this.props;
+    let { details, contracts } = Contract.WeiFundContracts;
 
-    console.log(Campaign);
+    console.log(details);
+    console.log(contracts)
 
-    var TransactionOrders = Campaign.newCampaign.TransactionOrders.map((order, index) => {
+    var TransactionOrders = Object.keys(details).map((contract, index) => {
+      console.log(details[contract]);
       return (
-        <ListGroup key={order.item}>
+        <ListGroup key={index}>
           <ListGroupItem>
-            <h5>{order.item}</h5>
-            <p>Estimated Gas Cost in Wei: {order.gasCostInWei}</p>
+            <h5>{contract}</h5>
+            <p>Estimated Gas Cost in Wei: {details[contract].gasEstimates.creation[1]}</p>
           </ListGroupItem>
         </ListGroup>
       );

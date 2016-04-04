@@ -1,8 +1,15 @@
+import * as WeiFundContracts from '../contracts/sol-js/index';
+import WeiFundContractsDetails from '../contracts/compiled/contracts.json!'
+
 // Initial PROVIDERS state variables
 
 const DEFAULT_CONTRACT_STATE = {
   contractsLoaded : undefined,
-  contractsError : undefined
+  contractsError : undefined,
+  WeiFundContracts : {
+    contracts : WeiFundContracts,
+    details : WeiFundContractsDetails
+  }
 };
 
 

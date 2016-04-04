@@ -9,7 +9,8 @@ class EthereumSettingsComponent extends Component {
     super(props);
     this.state = {
       setCustomProvider : false,
-      ethereumProvider : undefined
+      ethereumProvider : undefined,
+      installMetaMask : false
     }
   }
 
@@ -43,8 +44,16 @@ class EthereumSettingsComponent extends Component {
   setupEthereumProvider = () => {
     let { dispatch } = this.props;
 
+    if(this.state.installMetaMask){
+      window.location.reload();
+    }
+
     this.setState({setCustomProvider : false});
     dispatch(Actions.Providers.Ethereum(this.state.ethereumProvider));
+  }
+
+  installMetaMask = () => {
+    this.setState({installMetaMask : true});
   }
 
   close = () => {
@@ -73,10 +82,16 @@ class EthereumSettingsComponent extends Component {
                     <p>Please select your Ethereum RPC provider host.</p>
                     <br/>
                     <p>
-                      <ButtonToolbar>
-                        <Button onClick={this.customProvider}>Enter Custom Ethereum RPC Provider</Button>
-                        <Button style={{marginTop : '10px'}} bsStyle="primary" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">Install <strong>MetaMask</strong> Ethereum Provider Chrome Plugin</Button>
-                      </ButtonToolbar>
+                        { !this.state.installMetaMask ?
+                        <ButtonToolbar>
+                          <Button onClick={this.customProvider}>Enter Custom Ethereum RPC Provider</Button>
+                          <Button style={{marginTop : '10px'}} onClick={this.installMetaMask} bsStyle="primary" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">Install <strong>MetaMask</strong> Ethereum Provider Chrome Plugin</Button>
+                        </ButtonToolbar>
+                        :
+                        <ButtonToolbar>
+                          <Button bsStyle="success" onClick={this.setupEthereumProvider}>Test MetaMask Provider</Button>
+                        </ButtonToolbar>
+                        }
                     </p>
                   </Alert> :
                   <Input
