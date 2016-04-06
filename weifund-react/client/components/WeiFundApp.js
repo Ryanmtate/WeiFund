@@ -13,6 +13,7 @@ class WeiFundAppComponent extends Component {
 
     // Get Local Store data if available;
     dispatch(Actions.LocalStore.Get());
+    dispatch(Actions.Account.getAccounts());
   }
 
   render(){

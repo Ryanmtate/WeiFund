@@ -27,7 +27,8 @@ class CampaignStepTwoComponent extends Component {
       profileImage : this.refs.profileImage.getValue(),
       videoUrl : this.refs.videoUrl.getValue(),
       description : this.refs.description.getValue(),
-      projectDetails : this.refs.projectDetails.getValue()
+      projectDetails : this.refs.projectDetails.getValue(),
+      categories : this.refs.selectedCategories.getValue()
     });
   }
 
@@ -58,10 +59,14 @@ class CampaignStepTwoComponent extends Component {
   }
 
   render(){
-    let { State, Providers } = this.props;
+    console.log(this.state);
+
+    let { State, Providers, Campaign } = this.props;
     let { operatorPersona, websiteUrl, bannerImage, profileImage, videoUrl, description, projectDetails} = this.state;
 
-    console.log(Providers);
+    var categories = Campaign.categories.map((category, i) => {
+      return (<option key={i} value={category}>{category}</option>);
+    })
 
     return (
       <Grid>
@@ -163,6 +168,13 @@ class CampaignStepTwoComponent extends Component {
             </Panel>
           </Col>
           <Col lg={6} md={6} sm={6} xs={6} >
+            <Panel>
+              <h4>Select Category</h4>
+              <Input type="select" ref="selectedCategories" onChange={this.updateCampaign} multiple>
+                { categories }
+              </Input>
+              <small>Hold shift to select multiple categories</small>
+            </Panel>
             <Panel>
               <Input
                 style={{height:'100px'}}

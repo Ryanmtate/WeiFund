@@ -44,11 +44,11 @@ export function selectAccount(selectedAccount){
     types : ['SELECT_ACCOUNT_REQUEST', 'SELECT_ACCOUNT_SUCCESS', 'SELECT_ACCOUNT_FAILURE'],
     promise : () => {
       return new Promise((resolve, reject) => {
-        web3.eth.defaultAccount = selectedAccount;
-        if(!web3.eth.defaultAccount || web3.eth.defaultAccount != selectedAccount){
+        web3.eth.defaultAccount = selectedAccount.address;
+        if(!web3.eth.defaultAccount || web3.eth.defaultAccount != selectedAccount.address){
           reject("Could not set default account");
         } else {
-          resolve(web3.eth.defaultAccount);
+          resolve({address : web3.eth.defaultAccount, balance : selectedAccount.balance});
         }
       });
     }

@@ -1,5 +1,24 @@
 const DEFAULT_CAMPAIGN_STATE = {
   currentStep : 0,
+  categories : [
+    'Art',
+    'Business',
+    'Cause',
+    'Construction',
+    'Community',
+    'Cryptocurrency',
+    'Education',
+    'Entertainment',
+    'Fashion',
+    'Film',
+    'Finance',
+    'Food',
+    'Hardware',
+    'Manufacturing',
+    'Music',
+    'Software',
+    'Technology'
+  ],
   campaignProcess : {
     steps : [{
       title : 'Basics',
@@ -40,6 +59,7 @@ const DEFAULT_CAMPAIGN_STATE = {
     bannerImage : undefined,
     profileImage : undefined,
     videoUrl : undefined,
+    categories : [],
     description : undefined,
     projectDetails : undefined,
     createStandardToken : true,
@@ -47,26 +67,10 @@ const DEFAULT_CAMPAIGN_STATE = {
     autoDispersal : false,
     initialTokenAmount : undefined,
     initialTokenPrice : undefined,
-    TransactionOrders : [{
-      item : 'WeiFund Campaign',
-      gasCostInWei : 240000
-    }, {
-      item : 'WeiHash Registration',
-      gasCostInWei : 240000
-    }, {
-      item : 'Campaign Contribution Endpoint',
-      gasCostInWei : 100000
-    }, {
-      item : 'Operator Persona',
-      gasCostInWei : 100000
-    }, {
-      item : 'Custom Standard Token',
-      gasCostInWei : 100000
-    }, {
-      item : 'Custom Token Controller',
-      gasCostInWei : 100000
-    }]
-  }
+    TransactionOrders : []
+  },
+  registration : undefined,
+  error : undefined
 }
 
 export default function CAMPAIGN(state = DEFAULT_CAMPAIGN_STATE, action){
@@ -81,7 +85,48 @@ export default function CAMPAIGN(state = DEFAULT_CAMPAIGN_STATE, action){
         ...state,
         newCampaign : action.newCampaign
       };
+    case 'NEW_CAMPAIGN_REQUEST':
+      return {
+        ...state
+      };
+    case 'NEW_CAMPAIGN_SUCCESS':
+      return {
+        ...state,
+        registration : action.result
+      };
+    case 'NEW_CAMPAIGN_FAILURE':
+      return {
+        ...state,
+        error : action.error
+      };
     default:
       return state;
   }
 }
+
+
+
+
+
+
+
+// Save for questions later...
+// {
+//   item : 'WeiFund Campaign',
+//   gasCostInWei : 240000
+// }, {
+//   item : 'WeiHash Registration',
+//   gasCostInWei : 240000
+// }, {
+//   item : 'Campaign Contribution Endpoint',
+//   gasCostInWei : 100000
+// }, {
+//   item : 'Operator Persona',
+//   gasCostInWei : 100000
+// }, {
+//   item : 'Custom Standard Token',
+//   gasCostInWei : 100000
+// }, {
+//   item : 'Custom Token Controller',
+//   gasCostInWei : 100000
+// }

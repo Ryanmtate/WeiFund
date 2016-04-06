@@ -10,8 +10,10 @@ class CampaignStepOneComponent extends Component {
   constructor(props) {
     super(props);
     let { newCampaign } = this.props.Campaign;
+    let { accounts } = this.props.Account;
     this.state = {
-      ...newCampaign
+      ...newCampaign,
+      beneficiary : accounts[0].address
     };
   }
 
@@ -68,6 +70,10 @@ class CampaignStepOneComponent extends Component {
 
   render(){
     let { name, expiry, beneficiary, fundingGoal, contributionEndpoint } = this.state;
+    let { Account } = this.props;
+    let { accounts } = Account;
+
+    console.log(accounts);
 
     return (
       <Grid>
@@ -98,13 +104,13 @@ class CampaignStepOneComponent extends Component {
                 <Input
                   type="text"
                   value={beneficiary}
-                  placeholder={""}
+                  placeholder={!accounts[0] ? null : accounts[0].address}
                   label={
                     <div>
                     <h4>Campaign Beneficiary</h4>
                     </div>}
                   help={`Please enter the Ethereum address of the campaign beneficiary.
-                    e.g. 0x6b1c6b73bfbcc6262653118a96d413b2cd449c68`}
+                    e.g. ${!accounts[0] ? "0x6b1c6b73bfbcc6262653118a96d413b2cd449c68" : accounts[0].address}`}
                   bsStyle={null}
                   hasFeedback
                   ref="campaignBeneficiary"
@@ -163,7 +169,7 @@ class CampaignStepOneComponent extends Component {
                 ref="contributionEndpoint"
                 groupClassName="group-class"
                 labelClassName="label-class"
-                onChange={this.updateCampaign} />
+                onChange={this.updateCampaign} disabled />
             </Panel>
           </Col>
         </Row>
@@ -184,7 +190,8 @@ const mapStateToProps = (state) => {
   return {
     LocalStore : state.LocalStore,
     Views : state.Views,
-    Campaign : state.Campaign
+    Campaign : state.Campaign,
+    Account : state.Account
   }
 }
 

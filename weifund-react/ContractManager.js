@@ -68,47 +68,59 @@ function DeployWeiFundContracts(){
     Pudding.setWeb3(web3);
 
     CompileContracts().then((_CompiledContracts) => {
+
+      console.log("Deploying WeiFund...");
       var WeiFund = WeiFundContracts.WeiFund;
       WeiFund.load(Pudding);
-
-      // Deploy WeiFund Core
       return WeiFund.new(SendFrom);
     }).then((WeiFund) => {
       DeployedContracts['WeiFund'] = WeiFund;
       console.log(`Deployed WeiFund at: ${WeiFund.address}`);
+
+      console.log("Deploying WeiHash...");
       var WeiHash = WeiFundContracts.WeiHash;
       WeiHash.load(Pudding);
       WeiFundAddr = WeiFund.address;
-
-      // Deploy WeiHash
       return WeiHash.new(WeiFundAddr, SendFrom);
     }).then((WeiHash) => {
+
       DeployedContracts['WeiHash'] = WeiHash;
       console.log(`Deployed WeiHash at: ${WeiHash.address}`);
-      // Check WeiHash was constructed with WeiFund Address
       return WeiHash.weifundAddr.call();
+
     }).then((WeiFundAddress) => {
       if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in WeiHash! Warning!!!")}
 
-      var WeiAccounts = WeiFundContracts.WeiAccounts;
-      WeiAccounts.load(Pudding);
+      console.log("Deploying CampaignAccountFactory...");
 
-      // Deploy WeiAccounts
-      return WeiAccounts.new(WeiFundAddress, SendFrom);
-    }).then((WeiAccounts) => {
-      DeployedContracts['WeiAccounts'] = WeiAccounts;
-      console.log(`Deployed WeiAccounts at: ${WeiAccounts.address}`);
-      return WeiAccounts.weifund.call();
+      var CampaignAccountFactory = WeiFundContracts.CampaignAccountFactory;
+      CampaignAccountFactory.load(Pudding);
+      return CampaignAccountFactory.new(WeiFundAddress, SendFrom);
+    }).then((CampaignAccountFactory) => {
+      DeployedContracts['CampaignAccountFactory'] = CampaignAccountFactory;
+      console.log(`Deployed CampaignAccountFactory at: ${CampaignAccountFactory.address}`);
 
+      return CampaignAccountFactory.weifund.call();
     }).then((WeiFundAddress) => {
+      if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in CampaignAccountFactory! Warning!!!")}
 
-      if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in WeiAccounts! Warning!!!")}
+      console.log("Deploying WeiControllerFactory...");
+      var WeiControllerFactory = WeiFundContracts.WeiControllerFactory;
+      WeiControllerFactory.load(Pudding);
+      return WeiControllerFactory.new(WeiFundAddr, SendFrom);
 
+    }).then((WeiControllerFactory) => {
+      DeployedContracts['WeiControllerFactory'] = WeiControllerFactory;
+      console.log(`Deployed WeiControllerFactory at: ${WeiControllerFactory.address}`);
+
+      return WeiControllerFactory.weifund.call();
+    }).then((WeiFundAddress) => {
+      if(WeiFundAddress != WeiFundAddr){reject("WeiFund Address Was Not Set in WeiControllerFactory! Warning!!!")}
+
+      console.log("Deploying PersonaRegistry...");
       var PersonaRegistry = WeiFundContracts.PersonaRegistry;
       PersonaRegistry.load(Pudding);
-
       return PersonaRegistry.new(WeiFundAddr, SendFrom);
-
     }).then((PersonaRegistry) => {
       DeployedContracts['PersonaRegistry'] = PersonaRegistry;
       console.log(`Deployed PersonaRegistry at: ${PersonaRegistry.address}`);

@@ -40,9 +40,6 @@ class CampaignStepThreeComponent extends Component {
       dispatch(Actions.Views.Body(view));
       dispatch(Actions.Campaign.currentStep(step));
       dispatch(Actions.Campaign.updateCampaignProcess(this.state));
-
-      // Call Get Account for next step;
-      dispatch(Actions.Account.getAccounts());
     }
   }
 

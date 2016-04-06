@@ -105,23 +105,23 @@ contract Standard_Token is Token {
 contract ServiceRegistry {
     mapping(address => address) public services;
     event ServiceAdded(address indexed _service, address _sender);
-    
+
     function addService(address _service) {
         services[_service] = msg.sender;
         ServiceAdded(_service, msg.sender);
     }
-    
+
     function ownerOf(address _service) constant returns (address) {
         return services[_service];
     }
-    
+
     function isService(address _service) constant returns (bool) {
         if (services[_service] != address(0))
             return true;
     }
 }
 
-contract WeiFund_Token_Factory is ServiceRegistry {
+contract WeiFundTokenFactory is ServiceRegistry {
     function createStandardToken(address _owner, uint256 _initialAmount) returns (address newTokenAddr) {
         newTokenAddr = address(new Standard_Token(_initialAmount));
 		addService(newTokenAddr);
